@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="config.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ball balancing table</title>
+</head>
+<body>
+  
+  <section class="body">
+    <header class="color">
+        <nav class=" nav">
+            <div class="titree" >
+                 </div>
+                
+            <div class="line" id="navbar">
+                
+            
+                <ul  type="none"class=" list" class="line" >
+                <li><a href="file:///C:/Users/Tassou/Desktop/projet-git/page-acceuil/index.html">Homepage </a></li>
+                <li><a href="file:///C:/Users/Tassou/Desktop/projet-git/Explore-page/Explore.html">Explore</a></li>
+                <li><a href=""><div style="color: rgb(24, 140, 211);">Configuration</div></a></li>
+                <li><a href="file:///C:/Users/Tassou/Desktop/projet-git/control-page/control.html">Control</a></li> 
+                <li ><a href="file:///C:/Users/Tassou/Desktop/projet-git/about-us/aboutus.html" >About-us</a></li>
+                
+            </Ul >
+           
+        </div> 
+    </nav>  
+    </header>
+    
+
+    <body>
+      <div class="container">
+          <div class="left-section">
+            <h1 class="tt">Configuration</h1><br><br>
+              <div class="group">
+                  <div class="config-card">
+                      <h2 class="titre">Control</h2>
+                      <div class="boutton-container">
+                          <button class="boutton">P(reg)</button>
+                          <button class="boutton">PD(reg)</button>
+                          <button class="boutton">PV(reg)</button>
+                          <button class="boutton">PID(reg)</button>
+                      </div>
+                  </div>
+                  <div class="config-card">
+                      <h2 class="titre">Aspect</h2>
+                      <div class="boutton-container">
+                          <button class="boutton">Unstable</button>
+                          <button class="boutton">Amortie</button>
+                          <button class="boutton">Osci-AM</button>
+                          <button class="boutton">Osci</button>
+                      </div>
+                  </div>
+              </div>
+              <div class="group">
+                  <div class="config-card translate">
+                      <h2 class="titre">Variables</h2>
+                      <div class="boutton-container">
+                          <button class="boutton">KP
+                          <label for="valeur" ></label>
+                          <input class="valeur" type="number" id="valeur" name="valeur">
+                          </button>
+                          <button class="boutton">KD
+                            <label for="valeur"></label>
+                            <input class="valeur" type="number" id="valeur" name="valeur">
+                            </button>
+                            <button class="boutton">Ki
+                                <label for="valeur"></label>
+                                <input class="valeur" type="number" id="valeur" name="valeur">
+                                </button><br>
+                          <button class="bouttone">Send</button>
+                      </div>
+                  </div>
+                 
+              </div>
+              <div class="config-card translate">
+                <h2 class="titre ">Servo-config</h2>
+                  <div class="boutton-container">
+                      <button class="boutton">servox-offset
+                            <label for="valeur"></label>
+                            <input class="valeur" type="number" id="valeur" name="valeur">
+                            
+                      </button>
+                      <button class="boutton">servoy-offset
+                        <label for="valeur"></label>
+                            <input class="valeur" type="number" id="valeur" name="valeur">
+                      </button>
+                      <button class="bouttone">Send</button>
+                  </div>
+              </div>
+          </div>
+          <div class="right-section">
+            <h1 class="ttt">Visualisation</h1>
+              <!-- Affichage de la caméra -->
+              <div  class="camera-display">   
+                <div class="button-container" >
+                <video class="video" id="video" autoplay></video>
+                 <button class="btn" onclick="startCamera()">Start</button>
+                 <button class="btn" onclick="stopCamera()">Stop</button>
+                 <button class="btn" onclick="refreshVideo()">Refresh</button>
+                </div> 
+              </div>
+          </div>
+      </div>
+      <script>
+        // Modifier la valeur de la case de valeur avec l'ID "valeur"
+        document.getElementById("valeur") 
+    </script> 
+  
+    <script>
+        let videoStream;
+
+function startCamera() {
+    // Vérifier si la caméra est déjà active
+    if (videoStream) {
+        console.log('Camera already started.');
+        return;
+    }
+
+    // Accéder à la caméra de l'utilisateur
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function(stream) {
+            var videoElement = document.getElementById('video');
+            videoElement.srcObject = stream;
+            videoStream = stream; // Conserver la référence au flux vidéo
+        })
+        .catch(function(err) {
+            console.error('Error accessing camera:', err);
+        });
+}
+
+function stopCamera() {
+    // Vérifier si la caméra est déjà arrêtée
+    if (!videoStream) {
+        console.log('Camera already stopped.');
+        return;
+    }
+
+    // Arrêter la capture vidéo
+    videoStream.getTracks().forEach(track => track.stop());
+    videoStream = null; // Réinitialiser la référence au flux vidéo
+}
+
+function refreshVideo() {
+    var videoElement = document.getElementById('video');
+    videoElement.srcObject = null; // Arrêter la vidéo actuelle
+    videoElement.srcObject = videoStream; // Rafraîchir la vidéo en rechargeant le flux vidéo
+}
+</script>
+
+  </body>
+  
+      </html>
+      
+    
